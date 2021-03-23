@@ -8,8 +8,33 @@ def listToString(s):
         str1 += ele   
     
     # return string
-    print(str1)   
+    #print(str1)   
     return str1  
+
+def processStateCount(stringSplitBySemicolon):
+    stateCount = stringSplitBySemicolon[0]
+
+    return stateCount
+
+def processAlphabet(stringSplitBySemicolon):
+    alphabet = stringSplitBySemicolon[1].split(",")
+
+    return alphabet
+
+def processTransitions(stringSplitBySemicolon):
+    #construct a transition here
+    return 0
+
+def processStartState(stringSplitBySemicolon):
+    startState = stringSplitBySemicolon[3]
+
+    return startState
+
+def processAcceptStates(stringSplitBySemicolon):
+    acceptStates = stringSplitBySemicolon[4].split(",")
+
+    return acceptStates
+
 
 fname = 'legal.txt'
 
@@ -20,13 +45,18 @@ total = 0
 with open(fname) as f:
     content = f.readlines()
 
-x = listToString(content)
+inputString = listToString(content)
+splitBySemicolon = inputString.split(";")
 
-for parts in x:
-    parts = parts.replace("\n", "")
-    out.write(parts)
-    #print(parts)
-out.write('\n')
+firstParensIndex = splitBySemicolon[2].split(",")
+
+
+for parts in splitBySemicolon:
+    
+    print(parts)
+    
+        
+#out.write('\n')
 # out.write(str(total))
 out.close()
 f.close()
