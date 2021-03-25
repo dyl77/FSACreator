@@ -1,9 +1,10 @@
+from state import *
+from transition import *
+
 def listToString(s):  
     
-    # initialize an empty string 
     str1 = ""  
-    
-    # traverse in the string   
+     
     for ele in s:  
         str1 += ele   
     
@@ -11,6 +12,7 @@ def listToString(s):
     #print(str1)   
     return str1  
 
+##### Processing String to get info about FA #####
 def processStateCount(stringSplitBySemicolon):
     stateCount = stringSplitBySemicolon[0]
 
@@ -35,6 +37,34 @@ def processAcceptStates(stringSplitBySemicolon):
 
     return acceptStates
 
+def createStates(stateCount):
+    i = 0
+    stateList = list()
+
+    while i < stateCount:
+        stateList.append(State())
+        i +=1
+
+    return stateList;
+
+def createTransitions(stringSplitBySemicolon):
+    transitions = stringSplitBySemicolon[2].split(",")
+    transitionContainer = list()
+
+    for parts in transitions:
+        singleParts = parts.split(":")
+        singleParts[0] = singleParts[0].replace("(", "")
+        singleParts[2] = singleParts[2].replace(")", "")
+        # print(singleParts)
+        transitionContainer.append(Transition(singleParts[0], singleParts[1], singleParts[2]))
+
+    return transitionContainer
+        
+    
+
+
+
+##### End processing of string to get info about FA ######
 
 fname = 'legal.txt'
 
@@ -49,11 +79,12 @@ inputString = listToString(content)
 splitBySemicolon = inputString.split(";")
 
 firstParensIndex = splitBySemicolon[2].split(",")
+transitionContainer = createTransitions(splitBySemicolon)
 
 
 for parts in splitBySemicolon:
-    
-    print(parts)
+    pass
+    # print(parts)
     
         
 #out.write('\n')

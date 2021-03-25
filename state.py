@@ -1,8 +1,8 @@
 class State:
-    def __init__(self, transitions, isStart, isAccept):
-        self.transitions = transitions
-        self.isStart = isStart
-        self.isAccept = isAccept
+    def __init__(self): #, transitions, isStart, isAccept):
+        self.transitions = None
+        self.isStart = 0
+        self.isAccept = 0
 
     def getTransitions(self):
         return self.transitions
@@ -12,3 +12,12 @@ class State:
 
     def getIsAccept(self):
         return self.isAccept
+
+    def setTransitions(self, transitions):
+        self.transitions = transitions
+
+    def setIsStart(self, isStart):
+        self.isStart = isStart
+
+    def setIsAccept(self, isAccept):
+        self.isAccept = isAccept
