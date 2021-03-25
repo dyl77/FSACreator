@@ -41,11 +41,11 @@ def createStates(stateCount):
     i = 0
     stateList = list()
 
-    while i < stateCount:
-        stateList.append(State())
+    while i < int(stateCount):
+        stateList.append(State(i))
         i +=1
 
-    return stateList;
+    return stateList
 
 def createTransitions(stringSplitBySemicolon):
     transitions = stringSplitBySemicolon[2].split(",")
@@ -59,8 +59,13 @@ def createTransitions(stringSplitBySemicolon):
         transitionContainer.append(Transition(singleParts[0], singleParts[1], singleParts[2]))
 
     return transitionContainer
-        
-    
+
+def addTransitionsToStates(stateList, transitionContainer):
+
+    for transition in transitionContainer:
+        for state in stateList:
+            if state.getStateNumber() == transition.getFromState():
+                state.addTransition(transition)
 
 
 
@@ -78,8 +83,11 @@ with open(fname) as f:
 inputString = listToString(content)
 splitBySemicolon = inputString.split(";")
 
-firstParensIndex = splitBySemicolon[2].split(",")
+stateCount = processStateCount(splitBySemicolon)
+stateList = createStates(stateCount)
 transitionContainer = createTransitions(splitBySemicolon)
+addTransitionsToStates(stateList, transitionContainer)
+
 
 
 for parts in splitBySemicolon:
