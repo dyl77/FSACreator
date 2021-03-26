@@ -55,7 +55,7 @@ def createTransitions(stringSplitBySemicolon):
         singleParts = parts.split(":")
         singleParts[0] = singleParts[0].replace("(", "")
         singleParts[2] = singleParts[2].replace(")", "")
-        # print(singleParts)
+        print(singleParts)
         transitionContainer.append(Transition(singleParts[0], singleParts[1], singleParts[2]))
 
     return transitionContainer
@@ -83,16 +83,23 @@ with open(fname) as f:
 inputString = listToString(content)
 splitBySemicolon = inputString.split(";")
 
+# Put into configureAutomata def
 stateCount = processStateCount(splitBySemicolon)
 stateList = createStates(stateCount)
 transitionContainer = createTransitions(splitBySemicolon)
 addTransitionsToStates(stateList, transitionContainer)
 
+#Set up loop to read chars from input string for processing
+#Make legal and illegal string
+#Send char to start state (Debug: send legal or illegal char to console)
+#Make next state function, where it returns illegal (-1) or legal state number & 
+#Test if end of string and ask if accept state, if not not accepted string
+
 
 
 for parts in splitBySemicolon:
     pass
-    # print(parts)
+    #print(parts)
     
         
 #out.write('\n')
