@@ -26,5 +26,5 @@ class State:
     def setIsAccept(self):
         self.isAccept = 1
 
-    def addTransiton(self, transition):
+    def addTransition(self, transition):
         self.transitions.append(transition)

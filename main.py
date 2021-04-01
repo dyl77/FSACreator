@@ -1,3 +1,10 @@
-from automataBuilder import buildAutomata
+from automataBuilder import *
+from automataRunner import *
 
-buildAutomata()
+stateList = buildAutomata()
+
+autoRunner = Runner(getStartState(stateList))
+
+chars = getInputChars("legal.txt")
+print(chars)
+  

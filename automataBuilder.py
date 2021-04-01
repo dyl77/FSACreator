@@ -64,7 +64,7 @@ def addTransitionsToStates(stateList, transitionContainer):
 
     for transition in transitionContainer:
         for state in stateList:
-            if state.getStateNumber() == transition.getFromState():
+            if state.getStateNumber() == int(transition.getFromState()):
                 state.addTransition(transition)
 
 def setStartState(stateList, startStateNo):
@@ -77,6 +77,25 @@ def setAcceptStates(stateList, acceptStateNumbers):
         for state in stateList:
             if state.getStateNumber() == int(stateNumbers):
                 state.setIsAccept()
+
+def getStartState(stateList):
+    for state in stateList:
+        if(state.getIsStart()):
+            return state.getStateNumber()
+
+def getInputChars(filename):
+    chars = list()
+    file = open(filename, 'r')
+  
+    while 1:
+        # read by character
+        char = file.read(1)
+        chars.append(char)          
+        if not char: 
+            break
+    chars.remove('')
+    return chars
+
 
 def buildAutomata():
     fname = 'fsa.txt'
@@ -104,6 +123,7 @@ def buildAutomata():
         print("State No: " + str(parts.getStateNumber()) + " Is Start?: " + str(parts.getIsStart()) + " Is Accept?: " + str(parts.getIsAccept()) + "\n")
 
     f.close()
+    return stateList
 
 
 
@@ -112,6 +132,6 @@ def buildAutomata():
 #Set up loop to read chars from input string for processing
 #Make legal and illegal string
 #Send char to start state (Debug: send legal or illegal char to console)
-#Make next state function, where it returns illegal (-1) or legal state number & 
-#Test if end of string and ask if accept state, if not not accepted string
+#Make next state function, where it returns illegal (-1) or legal state number &  (DONE)
+#Test if end of string and ask if accept state, if not not accepted string (DONE)
     
