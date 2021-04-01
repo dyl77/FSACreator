@@ -20,11 +20,11 @@ class State:
     def setTransitions(self, transitions):
         self.transitions = transitions
 
-    def setIsStart(self, isStart):
-        self.isStart = isStart
+    def setIsStart(self):
+        self.isStart = 1
 
-    def setIsAccept(self, isAccept):
-        self.isAccept = isAccept
+    def setIsAccept(self):
+        self.isAccept = 1
 
     def addTransiton(self, transition):
         self.transitions.append(transition)

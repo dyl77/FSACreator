@@ -55,7 +55,7 @@ def createTransitions(stringSplitBySemicolon):
         singleParts = parts.split(":")
         singleParts[0] = singleParts[0].replace("(", "")
         singleParts[2] = singleParts[2].replace(")", "")
-        print(singleParts)
+        # print(singleParts)
         transitionContainer.append(Transition(singleParts[0], singleParts[1], singleParts[2]))
 
     return transitionContainer
@@ -67,44 +67,51 @@ def addTransitionsToStates(stateList, transitionContainer):
             if state.getStateNumber() == transition.getFromState():
                 state.addTransition(transition)
 
+def setStartState(stateList, startStateNo):
+    for state in stateList:
+        if(state.getStateNumber() == int(startStateNo)):
+            state.setIsStart()
+
+def setAcceptStates(stateList, acceptStateNumbers):
+    for stateNumbers in acceptStateNumbers:
+        for state in stateList:
+            if state.getStateNumber() == int(stateNumbers):
+                state.setIsAccept()
+
+def buildAutomata():
+    fname = 'fsa.txt'
+
+    with open(fname) as f:
+        content = f.readlines()
+
+    inputString = listToString(content)
+    splitBySemicolon = inputString.split(";")
+
+    # Put into configureAutomata def
+    stateCount = processStateCount(splitBySemicolon)
+    stateList = createStates(stateCount)
+    transitionContainer = createTransitions(splitBySemicolon)
+    addTransitionsToStates(stateList, transitionContainer)
+
+    startStateNo = processStartState(splitBySemicolon)
+    acceptStateNumbers = processAcceptStates(splitBySemicolon)
+
+    setStartState(stateList, startStateNo)
+    setAcceptStates(stateList, acceptStateNumbers)
+
+    
+    for parts in stateList:
+        print("State No: " + str(parts.getStateNumber()) + " Is Start?: " + str(parts.getIsStart()) + " Is Accept?: " + str(parts.getIsAccept()) + "\n")
+
+    f.close()
+
 
 
 ##### End processing of string to get info about FA ######
-
-fname = 'legal.txt'
-
-out = open('out.txt','w')
-
-total = 0
-
-with open(fname) as f:
-    content = f.readlines()
-
-inputString = listToString(content)
-splitBySemicolon = inputString.split(";")
-
-# Put into configureAutomata def
-stateCount = processStateCount(splitBySemicolon)
-stateList = createStates(stateCount)
-transitionContainer = createTransitions(splitBySemicolon)
-addTransitionsToStates(stateList, transitionContainer)
 
 #Set up loop to read chars from input string for processing
 #Make legal and illegal string
 #Send char to start state (Debug: send legal or illegal char to console)
 #Make next state function, where it returns illegal (-1) or legal state number & 
 #Test if end of string and ask if accept state, if not not accepted string
-
-
-
-for parts in splitBySemicolon:
-    pass
-    #print(parts)
     
-        
-#out.write('\n')
-# out.write(str(total))
-out.close()
-f.close()
-
-        
