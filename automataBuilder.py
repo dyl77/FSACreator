@@ -55,7 +55,6 @@ def createTransitions(stringSplitBySemicolon):
         singleParts = parts.split(":")
         singleParts[0] = singleParts[0].replace("(", "")
         singleParts[2] = singleParts[2].replace(")", "")
-        # print(singleParts)
         transitionContainer.append(Transition(singleParts[0], singleParts[1], singleParts[2]))
 
     return transitionContainer
@@ -97,8 +96,8 @@ def getInputChars(filename):
     return chars
 
 
-def buildAutomata():
-    fname = 'fsa.txt'
+def buildAutomata(fsaFileName):
+    fname = fsaFileName
 
     with open(fname) as f:
         content = f.readlines()
@@ -118,10 +117,6 @@ def buildAutomata():
     setStartState(stateList, startStateNo)
     setAcceptStates(stateList, acceptStateNumbers)
 
-    
-    # for parts in stateList:
-    #     print("State No: " + str(parts.getStateNumber()) + " Is Start?: " + str(parts.getIsStart()) + " Is Accept?: " + str(parts.getIsAccept()) + "\n")
-
     f.close()
     return stateList
 
@@ -129,9 +124,9 @@ def buildAutomata():
 
 ##### End processing of string to get info about FA ######
 
-#Set up loop to read chars from input string for processing
-#Make legal and illegal string
-#Send char to start state (Debug: send legal or illegal char to console)
+#Set up loop to read chars from input string for processing (DONE)
+#Make legal and illegal string (DONE)
+#Send char to start state (Debug: send legal or illegal char to console) (DONE)
 #Make next state function, where it returns illegal (-1) or legal state number &  (DONE)
 #Test if end of string and ask if accept state, if not not accepted string (DONE)
     
