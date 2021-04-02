@@ -81,7 +81,7 @@ def setAcceptStates(stateList, acceptStateNumbers):
 def getStartState(stateList):
     for state in stateList:
         if(state.getIsStart()):
-            return state.getStateNumber()
+            return state
 
 def getInputChars(filename):
     chars = list()
@@ -93,7 +93,7 @@ def getInputChars(filename):
         chars.append(char)          
         if not char: 
             break
-    chars.remove('')
+    #chars.remove('')
     return chars
 
 
@@ -119,8 +119,8 @@ def buildAutomata():
     setAcceptStates(stateList, acceptStateNumbers)
 
     
-    for parts in stateList:
-        print("State No: " + str(parts.getStateNumber()) + " Is Start?: " + str(parts.getIsStart()) + " Is Accept?: " + str(parts.getIsAccept()) + "\n")
+    # for parts in stateList:
+    #     print("State No: " + str(parts.getStateNumber()) + " Is Start?: " + str(parts.getIsStart()) + " Is Accept?: " + str(parts.getIsAccept()) + "\n")
 
     f.close()
     return stateList
