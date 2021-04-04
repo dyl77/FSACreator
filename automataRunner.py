@@ -22,14 +22,11 @@ class Runner:
 
 
     def changeState(self, letter):
-        # print(self.currentState)
         transitions = self.currentState.getTransitions()
 
         for transition in transitions:
-            # print(transition.getToState()+ " " + transition.getTransitionLetter())
             if transition.getTransitionLetter() == letter:
                 newStateNumber = transition.getToState()
-                # print("NewstateNumber: " + newStateNumber)
                 break
         else:
             return -1
