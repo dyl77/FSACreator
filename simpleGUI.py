@@ -33,6 +33,7 @@ def drawStates(stateCount, stateList):
         x += 1
 
 def drawTransitions(stateList):
+    longoffset = -20
     for state in stateList:
        transitions = state.getTransitions()
        for transition in transitions:
@@ -45,13 +46,25 @@ def drawTransitions(stateList):
                 label = Label(root, text=str(transition.getTransitionLetter()))
                 label.place(x=newCircleCoords[0]+35, y= newCircleCoords[1]+35)
             else:
-                fromCoords = myCanvas.coords(circles[int(transition.getFromState())])
-                toCoords = myCanvas.coords(circles[int(transition.getToState())])
-                lineid = myCanvas.create_line(fromCoords[0], fromCoords[1], toCoords[0], toCoords[1], arrow= "last")
-                label = Label(root, text=str(transition.getTransitionLetter()))
-                labelx = (fromCoords[0] + toCoords[0])/2
-                labely = (fromCoords[1] + toCoords[1])/2
-                label.place(x=labelx, y= labely)
+                if abs(int(transition.getToState()) - int(transition.getFromState())) > 1:
+                    fromCoords = myCanvas.coords(circles[int(transition.getFromState())])
+                    toCoords = myCanvas.coords(circles[int(transition.getToState())])
+                    myCanvas.create_line(fromCoords[0],fromCoords[3], fromCoords[0]+longoffset, fromCoords[3])
+                    connectingLiney = (toCoords[1] + toCoords[3])/2
+                    lineid = myCanvas.create_line(fromCoords[0]+longoffset, fromCoords[3], toCoords[0]+longoffset, connectingLiney)
+                    myCanvas.create_line(toCoords[0]+longoffset, connectingLiney, toCoords[0],connectingLiney, arrow= "last" )
+                    label = Label(root, text=str(transition.getTransitionLetter()))
+                    labelx = (fromCoords[0] + toCoords[0])/2 -40
+                    labely = 15 + (fromCoords[1] + toCoords[1])/2
+                    label.place(x=labelx, y= labely)
+                else:
+                    fromCoords = myCanvas.coords(circles[int(transition.getFromState())])
+                    toCoords = myCanvas.coords(circles[int(transition.getToState())])
+                    lineid = myCanvas.create_line(fromCoords[0]+20, fromCoords[3], toCoords[0]+20, toCoords[1], arrow= "last")
+                    label = Label(root, text=str(transition.getTransitionLetter()))
+                    labelx = 25 + (fromCoords[0] + toCoords[0])/2
+                    labely = 15 + (fromCoords[1] + toCoords[1])/2
+                    label.place(x=labelx, y= labely)
 
 
 def labelStates(stateCount):
